@@ -1,19 +1,23 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
+	"strconv"
 )
 
 func main() {
-	var input int
 	inputData := make([]int, 0)
-	fmt.Println("Для завершения ввода введите любой символ\n")
-	for {
-		fmt.Print("Введите значение: ")
-		_, err := fmt.Scanln(&input)
+	scaner := bufio.NewScanner(os.Stdin)
+
+	for scaner.Scan() {
+		input, err := strconv.Atoi(scaner.Text())
 		if err != nil {
-			break
+			fmt.Println("Не число. Пропускаем")
+			continue
 		}
+
 		inputData = insertWithSort(inputData, input)
 	}
 
